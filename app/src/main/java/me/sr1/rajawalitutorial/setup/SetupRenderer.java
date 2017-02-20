@@ -23,41 +23,59 @@ public class SetUpRenderer extends Renderer {
 
     private static final String TAG = "SetUpRenderer";
 
-    private Context mContext;
     private DirectionalLight mDirectionalLight;
     private Sphere mEarthSphere;
 
     public SetUpRenderer(Context context) {
         super(context);
-        mContext = context;
+        // 设置渲染帧率
         setFrameRate(60);
     }
 
+    /**
+     * 这里进行场景的初始化操作
+     */
     @Override
     protected void initScene() {
+        // 生成光照
         mDirectionalLight = new DirectionalLight(1f, 0.2f, -1f);
         mDirectionalLight.setColor(1f, 1f, 1f);
         mDirectionalLight.setPower(2);
+        // 把光照添加到场景中
         getCurrentScene().addLight(mDirectionalLight);
 
+        // 创建材质
         Material material = new Material();
         material.enableLighting(true);
         material.setDiffuseMethod(new DiffuseMethod.Lambert());
         material.setColor(0);
 
+        // 纹理素材
         Texture earthTexture = new Texture("Earth", R.drawable.earthtruecolor_nasa_big);
         try {
+            // 为材质添加纹理
             material.addTexture(earthTexture);
         } catch (ATexture.TextureException ex) {
             Log.w(TAG, "TEXTURE ERROR", ex);
         }
 
+        // 创建一个球体，即地球
         mEarthSphere = new Sphere(1, 24, 24);
+        // 给地球的表面添加材质
         mEarthSphere.setMaterial(material);
+
+        // 把球体加到场景里
         getCurrentScene().addChild(mEarthSphere);
+
+        // 设置摄像头的位置
         getCurrentCamera().setZ(4.2f);
     }
 
+    /**
+     * 每一帧渲染的时候调用
+     * @param ellapsedRealtime
+     * @param deltaTime
+     */
     @Override
     protected void onRender(long ellapsedRealtime, double deltaTime) {
         super.onRender(ellapsedRealtime, deltaTime);
@@ -66,11 +84,11 @@ public class SetUpRenderer extends Renderer {
 
     @Override
     public void onOffsetsChanged(float xOffset, float yOffset, float xOffsetStep, float yOffsetStep, int xPixelOffset, int yPixelOffset) {
-
+        // 先忽略
     }
 
     @Override
     public void onTouchEvent(MotionEvent event) {
-
+        // 先忽略
     }
 }

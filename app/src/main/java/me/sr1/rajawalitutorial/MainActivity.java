@@ -7,7 +7,7 @@ import org.rajawali3d.renderer.Renderer;
 import org.rajawali3d.view.ISurface;
 import org.rajawali3d.view.SurfaceView;
 
-import me.sr1.rajawalitutorial.setup.SetUpRenderer;
+import me.sr1.rajawalitutorial.loadmodel.LoadObjModelRenderer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(surface);
 
         // 创建渲染器
-        Renderer renderer = new SetUpRenderer(this);
+        Renderer renderer = new LoadObjModelRenderer(this);
         // 把渲染器设置给Surface，后续Surface就会使用它来绘制界面
         surface.setSurfaceRenderer(renderer);
     }

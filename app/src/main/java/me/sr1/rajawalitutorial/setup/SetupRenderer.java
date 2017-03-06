@@ -16,14 +16,14 @@ import org.rajawali3d.renderer.Renderer;
 import me.sr1.rajawalitutorial.R;
 
 /**
- * Created by SR1 on 2017/2/21.
+ * Hello world! 渲染器
+ * @author SR1s
  */
 
 public class SetUpRenderer extends Renderer {
 
     private static final String TAG = "SetUpRenderer";
 
-    private DirectionalLight mDirectionalLight;
     private Sphere mEarthSphere;
 
     public SetUpRenderer(Context context) {
@@ -38,11 +38,11 @@ public class SetUpRenderer extends Renderer {
     @Override
     protected void initScene() {
         // 生成光照
-        mDirectionalLight = new DirectionalLight(1f, 0.2f, -1f);
-        mDirectionalLight.setColor(1f, 1f, 1f);
-        mDirectionalLight.setPower(2);
+        DirectionalLight light = new DirectionalLight(1f, 0.2f, -1f);
+        light.setColor(1f, 1f, 1f);
+        light.setPower(2);
         // 把光照添加到场景中
-        getCurrentScene().addLight(mDirectionalLight);
+        getCurrentScene().addLight(light);
 
         // 创建材质
         Material material = new Material();
